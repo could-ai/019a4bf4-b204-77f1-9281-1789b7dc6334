@@ -12,18 +12,18 @@ class User {
   });
 
   Map<String, dynamic> toJson() => {
-    'goal': goal,
-    'fitnessLevel': fitnessLevel,
-    'smallSpace': smallSpace,
-    'equipment': equipment,
-  };
+        'goal': goal,
+        'fitnessLevel': fitnessLevel,
+        'smallSpace': smallSpace,
+        'equipment': equipment,
+      };
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    goal: json['goal'],
-    fitnessLevel: json['fitnessLevel'],
-    smallSpace: json['smallSpace'] ?? false,
-    equipment: List<String>.from(json['equipment'] ?? []),
-  );
+        goal: json['goal'],
+        fitnessLevel: json['fitnessLevel'],
+        smallSpace: json['smallSpace'] ?? false,
+        equipment: List<String>.from(json['equipment'] ?? []),
+      );
 }
 
 class Progress {
@@ -33,14 +33,14 @@ class Progress {
   Progress({required this.date, required this.weight});
 
   Map<String, dynamic> toJson() => {
-    'date': date.toIso8601String(),
-    'weight': weight,
-  };
+        'date': date.toIso8601String(),
+        'weight': weight,
+      };
 
   factory Progress.fromJson(Map<String, dynamic> json) => Progress(
-    date: DateTime.parse(json['date']),
-    weight: json['weight'],
-  );
+        date: DateTime.parse(json['date']),
+        weight: json['weight'],
+      );
 }
 
 class Exercise {
@@ -59,20 +59,20 @@ class Exercise {
   });
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'sets': sets,
-    'reps': reps,
-    'description': description,
-    'requiresCamera': requiresCamera,
-  };
+        'name': name,
+        'sets': sets,
+        'reps': reps,
+        'description': description,
+        'requiresCamera': requiresCamera,
+      };
 
   factory Exercise.fromJson(Map<String, dynamic> json) => Exercise(
-    name: json['name'],
-    sets: json['sets'],
-    reps: json['reps'],
-    description: json['description'],
-    requiresCamera: json['requiresCamera'],
-  );
+        name: json['name'],
+        sets: json['sets'],
+        reps: json['reps'],
+        description: json['description'],
+        requiresCamera: json['requiresCamera'],
+      );
 }
 
 class Workout {
@@ -87,16 +87,18 @@ class Workout {
   });
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'exercises': exercises.map((e) => e.toJson()).toList(),
-  };
+        'id': id,
+        'name': name,
+        'exercises': exercises.map((e) => e.toJson()).toList(),
+      };
 
   factory Workout.fromJson(Map<String, dynamic> json) => Workout(
-    id: json['id'],
-    name: json['name'],
-    exercises: (json['exercises'] as List).map((e) => Exercise.fromJson(e)).toList(),
-  );
+        id: json['id'],
+        name: json['name'],
+        exercises: (json['exercises'] as List)
+            .map((e) => Exercise.fromJson(e))
+            .toList(),
+      );
 }
 
 class FoodItem {
@@ -107,14 +109,54 @@ class FoodItem {
   FoodItem({required this.name, required this.calories, required this.date});
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'calories': calories,
-    'date': date.toIso8601String(),
-  };
+        'name': name,
+        'calories': calories,
+        'date': date.toIso8601String(),
+      };
 
   factory FoodItem.fromJson(Map<String, dynamic> json) => FoodItem(
-    name: json['name'],
-    calories: json['calories'],
-    date: DateTime.parse(json['date']),
-  );
+        name: json['name'],
+        calories: json['calories'],
+        date: DateTime.parse(json['date']),
+      );
+}
+
+// NOVOS MODELOS PARA FUNÇÃO DE DIETA
+class Meal {
+  String name; // Nome da refeição, ex: "Café da manhã"
+  List<String> items; // Itens incluídos na refeição
+  double calories; // Calorias totais estimadas
+
+  Meal({required this.name, required this.items, required this.calories});
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'items': items,
+        'calories': calories,
+      };
+
+  factory Meal.fromJson(Map<String, dynamic> json) => Meal(
+        name: json['name'],
+        items: List<String>.from(json['items'] ?? []),
+        calories: json['calories'],
+      );
+}
+
+class DietDayPlan {
+  String day; // Dia da semana
+  List<Meal> meals; // Lista de refeições planejadas para o dia
+
+  DietDayPlan({required this.day, required this.meals});
+
+  Map<String, dynamic> toJson() => {
+        'day': day,
+        'meals': meals.map((m) => m.toJson()).toList(),
+      };
+
+  factory DietDayPlan.fromJson(Map<String, dynamic> json) => DietDayPlan(
+        day: json['day'],
+        meals: (json['meals'] as List)
+            .map((m) => Meal.fromJson(m))
+            .toList(),
+      );
 }

@@ -4,6 +4,7 @@ import '../providers/user_provider.dart';
 import 'workout_screen.dart';
 import 'progress_screen.dart';
 import 'food_analysis_screen.dart';
+import 'diet_screen.dart'; // Import para a tela de dieta
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -33,6 +34,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
             ],
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
@@ -40,6 +42,7 @@ class DashboardScreen extends StatelessWidget {
               ),
               child: const Text('Ver Progresso'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
@@ -47,7 +50,11 @@ class DashboardScreen extends StatelessWidget {
               ),
               child: const Text('Analisar Alimento'),
             ),
-            // TODO: Adicionar seção para wearables e monetização
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/diet'),
+              child: const Text('Ver Plano de Dieta'),
+            ),
           ],
         ),
       ),
@@ -57,11 +64,19 @@ class DashboardScreen extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Treinos'),
           BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Progresso'),
           BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Nutrição'),
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu), label: 'Dieta'),
         ],
         onTap: (index) {
-          if (index == 1) Navigator.pushNamed(context, '/workout');
+          if (index == 0) return; // já está na dashboard
+          if (index == 1 && userProvider.currentWorkout != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => WorkoutScreen(workout: userProvider.currentWorkout!)),
+            );
+          }
           if (index == 2) Navigator.pushNamed(context, '/progress');
           if (index == 3) Navigator.pushNamed(context, '/food_analysis');
+          if (index == 4) Navigator.pushNamed(context, '/diet');
         },
       ),
     );

@@ -4,10 +4,10 @@ import 'providers/user_provider.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/food_analysis_screen.dart';
+import 'screens/diet_screen.dart'; // Import para a nova tela de dieta
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // TODO: Inicializar Supabase quando conectado
   runApp(const FitnessApp());
 }
 
@@ -26,14 +26,14 @@ class FitnessApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           primarySwatch: Colors.blue,
-          fontFamily: 'Roboto',  // Suporte a português
+          fontFamily: 'Roboto',
         ),
         home: const InitialScreen(),
         routes: {
           '/onboarding': (context) => const OnboardingScreen(),
           '/dashboard': (context) => const DashboardScreen(),
           '/food_analysis': (context) => const FoodAnalysisScreen(),
-          // TODO: Adicionar rotas para treinos e progresso quando implementadas
+          '/diet': (context) => const DietScreen(), // Rota para o plano de dieta
         },
       ),
     );
@@ -46,7 +46,6 @@ class InitialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    // Verificar se usuário já completou onboarding
     if (!userProvider.isOnboardingComplete) {
       return const OnboardingScreen();
     }

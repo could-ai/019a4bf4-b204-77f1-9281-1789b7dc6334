@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'providers/user_provider.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/dashboard_screen.dart';
+import 'screens/food_analysis_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,7 @@ class FitnessApp extends StatelessWidget {
         routes: {
           '/onboarding': (context) => const OnboardingScreen(),
           '/dashboard': (context) => const DashboardScreen(),
+          '/food_analysis': (context) => const FoodAnalysisScreen(),
           // TODO: Adicionar rotas para treinos e progresso quando implementadas
         },
       ),

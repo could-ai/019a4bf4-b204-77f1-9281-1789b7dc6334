@@ -16,6 +16,8 @@ dependencies:
   shared_preferences: ^2.2.3  # Persistência local de dados
   fl_chart: ^0.67.0  # Gráficos para rastreamento de progresso
   intl: ^0.19.0  # Suporte a datas e internacionalização (português)
+  image_picker: ^1.0.7  # Para tirar foto de alimentos
+  google_ml_kit: ^0.18.0  # Para análise de imagem com IA (detecção de objetos/alimentos)
 
   # TODO: Adicionar dependências para wearables (ex.: health) quando backend estiver conectado
 

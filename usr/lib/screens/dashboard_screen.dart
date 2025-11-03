@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 import 'workout_screen.dart';
 import 'progress_screen.dart';
+import 'food_analysis_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -39,6 +40,13 @@ class DashboardScreen extends StatelessWidget {
               ),
               child: const Text('Ver Progresso'),
             ),
+            ElevatedButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const FoodAnalysisScreen()),
+              ),
+              child: const Text('Analisar Alimento'),
+            ),
             // TODO: Adicionar seção para wearables e monetização
           ],
         ),
@@ -48,10 +56,12 @@ class DashboardScreen extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Dashboard'),
           BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Treinos'),
           BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Progresso'),
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: 'Nutrição'),
         ],
         onTap: (index) {
           if (index == 1) Navigator.pushNamed(context, '/workout');
           if (index == 2) Navigator.pushNamed(context, '/progress');
+          if (index == 3) Navigator.pushNamed(context, '/food_analysis');
         },
       ),
     );
